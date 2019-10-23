@@ -44,6 +44,7 @@ class MuseumTest < Minitest::Test
     assert_equal 2, @museum.recommend_exhibits(@bob).length
     assert_equal [@imax], @museum.recommend_exhibits(@sally)
     assert @museum.recommend_exhibits(@sally).include?(@imax)
+
   end
 
   def test_it_tracks_patrons_visiting
@@ -53,5 +54,19 @@ class MuseumTest < Minitest::Test
     assert @museum.patrons.include?(@sally)
     assert @museum.patrons.include?(@bob)
     assert_equal 2, @museum.patrons.length
+
+  end
+
+  def test_patrons_by_exhibit_interest
+    @bob.add_interest("Dead Sea Scrolls")
+    @bob.add_interest("Gems and Minerals")
+    @sally.add_interest("IMAX")
+    @museum.add_exhibit(@gems_and_minerals)
+    @museum.add_exhibit(@dead_sea_scrolls)
+    @museum.add_exhibit(@imax)
+    @museum.admit(@bob)
+    @museum.admit(@sally)
+    # Brain fart. How test?!
+    # require 'pry'; binding.pry
   end
 end

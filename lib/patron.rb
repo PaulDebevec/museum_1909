@@ -7,6 +7,7 @@ class Patron
     @interests = []
   end
 
+  # Adds interest to the @interests array
   def add_interest(interest)
     @interests << interest
   end
